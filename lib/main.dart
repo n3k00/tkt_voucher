@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
 import 'package:tkt_voucher/controller/receipts_controller.dart';
 import 'package:tkt_voucher/controller/settings_controller.dart';
+import 'package:tkt_voucher/controller/voucher_controller.dart';
 import 'package:tkt_voucher/page/connect_page.dart';
 import 'package:tkt_voucher/page/home_page.dart';
 import 'package:tkt_voucher/page/receipts_page.dart';
 import 'package:tkt_voucher/page/settings_page.dart';
+import 'package:tkt_voucher/page/voucher_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,7 +42,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/home/connect",
           page: () => ConnectPage(),
-        )
+        ),
+        GetPage(
+          name: "/home/voucher",
+          page: () => VoucherPage(),
+        ),
       ],
     );
   }

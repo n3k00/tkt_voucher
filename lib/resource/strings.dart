@@ -1,0 +1,16 @@
+const TRANSACTION_ID = "ဘောင်ချာနံပါတ်";
+const TRANSACTION_DATE_AND_TIME = "ရက်စွဲ နှင့် အချိန်";
+const CAR_NUMBER = "ကားနံပါတ်";
+const FROM = "မှ";
+const FROM_TOWN = "ပို့သည့်မြို့";
+const TO = "သို့";
+const TO_TOWN = "လက်ခံမည့်မြို့";
+const SENDER = "ပို့သူ";
+const SENDER_PHONE = "ပို့သူ ဖုန်းနံပတ်";
+const RECEIVER = "လက်ခံသူ";
+const RECEIVER_PHONE = "လက်ခံသူ ဖုန်းနံပါတ်";
+const TYPE = "အမျိုးအစား";
+const NUMBER_OF_PARCEL = "အရေအတွက်";
+const CHARGES = "ကျသင့်ငွေ";
+const NOTE = "မှတ်ချက်";
+const CASH_ADVANCE = "စိုက်ငွေ";
