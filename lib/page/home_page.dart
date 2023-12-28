@@ -1,7 +1,10 @@
+import 'package:bluetooth_print/bluetooth_print.dart';
+import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
 import 'package:tkt_voucher/page/voucher_page.dart';
 import 'package:tkt_voucher/resource/constant.dart';
@@ -13,7 +16,8 @@ import 'package:tkt_voucher/widget/main_drawer.dart';
 class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    List<String> items = ["တန်ဆာခရှင်းပြီး", "တန်ဆာခမရှင်းရသေး"];
+    controller.getListData();
+    controller.checkConnect();
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -22,7 +26,12 @@ class HomePage extends GetView<HomeController> {
             onPressed: () {
               Get.toNamed("/home/connect");
             },
-            icon: Icon(Icons.bluetooth),
+            icon: controller.isConnected.value
+                ? Icon(
+                    Icons.bluetooth_connected_outlined,
+                    color: Colors.blue,
+                  )
+                : Icon(Icons.bluetooth),
           ),
         ],
       ),
@@ -58,23 +67,24 @@ class HomePage extends GetView<HomeController> {
                   children: [
                     /// ပို့သည့်မြို့
                     Expanded(
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          isExpanded: true,
-                          hint: DropDownHint(
-                            hintText: FROM_TOWN,
-                            prefixIcon: FontAwesomeIcons.city,
+                      child: Obx(
+                        () => DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            isExpanded: true,
+                            value: controller.fromTownSelected.value,
+                            items: controller.townList
+                                .map(
+                                  (String item) => DropdownMenuItem(
+                                    value: item,
+                                    child: Text(item),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (String? value) {
+                              controller.fromTownSelected.value = value!;
+                            },
+                            buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                           ),
-                          items: items
-                              .map(
-                                (String item) => DropdownMenuItem(
-                                  value: item,
-                                  child: Text(item),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (String? value) {},
-                          buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                         ),
                       ),
                     ),
@@ -82,23 +92,29 @@ class HomePage extends GetView<HomeController> {
 
                     /// လက်ခံမည့်မြို့
                     Expanded(
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          isExpanded: true,
-                          hint: DropDownHint(
-                            hintText: TO_TOWN,
-                            prefixIcon: FontAwesomeIcons.city,
+                      child: Obx(
+                        () => DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            isExpanded: true,
+                            hint: DropDownText(
+                              hintText: TO_TOWN,
+                              prefixIcon: FontAwesomeIcons.city,
+                            ),
+                            value: controller.toTownSelected.value,
+                            items: controller.townList
+                                .map(
+                                  (String item) => DropdownMenuItem(
+                                    value: item,
+                                    child: Text(item),
+                                  ),
+                                )
+                                .toList(),
+                            onChanged: (String? value) {
+                              print(value);
+                              controller.toTownSelected.value = value!;
+                            },
+                            buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                           ),
-                          items: items
-                              .map(
-                                (String item) => DropdownMenuItem(
-                                  value: item,
-                                  child: Text(item),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (String? value) {},
-                          buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                         ),
                       ),
                     ),
@@ -240,23 +256,27 @@ class HomePage extends GetView<HomeController> {
                 SizedBox(height: MARGIN_MEDIUM_2),
 
                 /// မှတ်ချက်
-                DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    isExpanded: true,
-                    hint: DropDownHint(
-                      hintText: NOTE,
-                      prefixIcon: FontAwesomeIcons.message,
+                Obx(
+                  () => DropdownButtonHideUnderline(
+                    child: DropdownButton2<String>(
+                      isExpanded: true,
+                      value: controller.selectedNote.value,
+                      items: controller.noteList
+                          .map(
+                            (String item) => DropdownMenuItem(
+                              value: item,
+                              child: DropDownText(
+                                hintText: item,
+                                prefixIcon: FontAwesomeIcons.message,
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (String? value) {
+                        controller.selectedNote.value = value!;
+                      },
+                      buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                     ),
-                    items: items
-                        .map(
-                          (String item) => DropdownMenuItem(
-                            value: item,
-                            child: Text(item),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: (String? value) {},
-                    buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                   ),
                 ),
                 SizedBox(height: MARGIN_MEDIUM_2),
@@ -281,12 +301,18 @@ class HomePage extends GetView<HomeController> {
                   },
                 ),
                 SizedBox(height: MARGIN_MEDIUM_2),
-                Center(
-                  child: ElevatedButton(
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(MARGIN_MEDIUM),
+                  ),
+                  child: MaterialButton(
                     onPressed: controller.prepareVoucher,
+                    minWidth: double.infinity,
                     child: Text("OK"),
                   ),
                 ),
+                SizedBox(height: MARGIN_MEDIUM_2),
               ],
             ),
           ),

@@ -14,3 +14,6 @@ const NUMBER_OF_PARCEL = "အရေအတွက်";
 const CHARGES = "ကျသင့်ငွေ";
 const NOTE = "မှတ်ချက်";
 const CASH_ADVANCE = "စိုက်ငွေ";
+const TOWN_LIST = ["လားရှိုး", "တာချီလိတ်", "တောင်ကြီး", "လွိုင်လင်"];
+const NOTE_LIST = ["တန်ဆာခ မရှင်းရသေး", "တန်ဆာခ ရှင်းပြီး"];
+const WARNING_TEXT = "အချက်အလက်အပြည့်အစုံဖြည့်ပြီး Bluetooth ချိတ်ပါ။";

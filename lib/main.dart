@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
 import 'package:tkt_voucher/controller/receipts_controller.dart';
 import 'package:tkt_voucher/controller/settings_controller.dart';
@@ -10,7 +11,8 @@ import 'package:tkt_voucher/page/receipts_page.dart';
 import 'package:tkt_voucher/page/settings_page.dart';
 import 'package:tkt_voucher/page/voucher_page.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(MyApp());
 }
 
