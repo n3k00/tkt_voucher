@@ -8,8 +8,11 @@ import 'package:tkt_voucher/widget/voucher_heading.dart';
 
 class VoucherWidget extends StatelessWidget {
   final VoucherVO voucher;
+  final String address;
+  final String phones;
 
-  VoucherWidget({required this.voucher});
+  VoucherWidget(
+      {required this.voucher, required this.address, required this.phones});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,10 @@ class VoucherWidget extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          VoucherHeading(),
+          VoucherHeading(
+            address: address,
+            phones: phones,
+          ),
           SizedBox(height: 8),
           DividerDottedLine(),
           SizedBox(height: 8),

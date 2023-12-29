@@ -24,6 +24,8 @@ class HomeController extends GetxController {
   RxString cashAdvance = RxString('');
   RxString fromTownSelected = RxString('');
   RxString toTownSelected = RxString('');
+  String address = '';
+  String phones = '';
 
   final box = GetStorage("settings");
 
@@ -46,20 +48,27 @@ class HomeController extends GetxController {
   void getListData() {
     /// for note List
     box.writeIfNull("noteList", NOTE_LIST);
-    List<dynamic>? tempNoteList = box.read("noteList");
-    if (tempNoteList != null && tempNoteList is List<String>) {
-      noteList.assignAll(tempNoteList);
+    dynamic tempNoteList = box.read("noteList");
+    if (tempNoteList != null && tempNoteList is List<dynamic>) {
+      noteList.assignAll(tempNoteList.cast<String>());
       selectedNote.value = noteList.first;
     }
 
     /// for town list
     box.writeIfNull("townList", TOWN_LIST);
-    List<dynamic>? tempTownList = box.read("townList");
-    if (tempTownList != null && tempTownList is List<String>) {
-      townList.assignAll(tempTownList);
+    dynamic tempTownList = box.read("townList");
+    if (tempTownList != null && tempTownList is List<dynamic>) {
+      townList.assignAll(tempTownList.cast<String>());
       fromTownSelected.value = townList.first;
-      toTownSelected.value = townList[1];
+      toTownSelected.value = townList.length > 1 ? townList[1] : "";
     }
+
+    /// for Voucher Heading
+    box.writeIfNull("address", ADDRESS_STRING);
+    address = box.read("address") ?? "";
+
+    box.writeIfNull("phones", PHONES_STRING);
+    phones = box.read("phones") ?? "";
   }
 
   void prepareVoucher() {
@@ -84,14 +93,14 @@ class HomeController extends GetxController {
         note: selectedNote.value,
         cashAdvance: cashAdvance.value,
       );
-      Get.toNamed("/home/voucher", arguments: [voucherVO]);
+      Get.toNamed("/home/voucher", arguments: [voucherVO, address, phones]);
       // Add other values here
     } else {
       Get.defaultDialog(
         title: "Warning",
         content: Padding(
           padding: const EdgeInsets.all(MARGIN_MEDIUM_2),
-          child: Text(WARNING_TEXT),
+          child: Text(WARNING_TEXT_FOR_HOME_PAGE),
         ),
         onConfirm: () {
           Get.back();

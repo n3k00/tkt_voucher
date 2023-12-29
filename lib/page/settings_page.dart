@@ -11,8 +11,25 @@ class SettingsPage extends GetView<SettingsController> {
         title: Text("Settings"),
       ),
       drawer: MainDrawer(),
-      body: Center(
-        child: Text(controller.title),
+      body: ListView(
+        children: [
+          ListTile(
+            title: Text("Edit Voucher Heading"),
+            trailing: Icon(Icons.chevron_right_outlined),
+            onTap: () {
+              Get.toNamed("/settings/edit_heading");
+            },
+          ),
+          Divider(),
+          ListTile(
+            title: Text("Edit City List"),
+            trailing: Icon(Icons.chevron_right_outlined),
+            onTap: () {
+              Get.toNamed("/settings/edit_cities");
+            },
+          ),
+          Divider(),
+        ],
       ),
     );
   }

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class VoucherHeading extends StatelessWidget {
+  final String address;
+  final String phones;
+  VoucherHeading({required this.address, required this.phones});
+
   @override
   Widget build(BuildContext context) {
     return MediaQuery(
@@ -18,7 +23,7 @@ class VoucherHeading extends StatelessWidget {
           SizedBox(height: 16),
           //address
           Text(
-            '41 ဂိတ်၊ နှစ်ထပ်တိုက်တန်းရှေ့၊ ရပ်ကွက်(၄)၊ လားရှိုးမြို့',
+            address,
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -28,7 +33,7 @@ class VoucherHeading extends StatelessWidget {
           SizedBox(height: 8),
           //phone
           Text(
-            'Ph - 09429363127, 09250787547, 09666628053',
+            "Ph - $phones",
             style: TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 16,
