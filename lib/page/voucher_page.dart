@@ -15,7 +15,7 @@ class VoucherPage extends StatelessWidget {
   VoucherVO voucher = Get.arguments[0];
   String address = Get.arguments[1];
   String phones = Get.arguments[2];
-
+  bool reprint = Get.arguments[3];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,39 +58,14 @@ class VoucherPage extends StatelessWidget {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  controller.screenshotController
-                      .capture(delay: Duration(milliseconds: 10))
-                      .then((capturedImage) async {
-                    Map<String, dynamic> config = {};
-                    List<LineText> list = [];
-
-                    List<int> imageBytes = capturedImage!.toList();
-                    String base64Image = base64Encode(imageBytes);
-
-                    list.add(LineText(
-                      type: LineText.TYPE_IMAGE,
-                      width: (74 * 8).toInt(), // Convert width to dots
-                      content: base64Image,
-                      align: LineText.ALIGN_CENTER,
-                      linefeed: 1, // Add linefeed for separation
-                    ));
-                    /*list.add(LineText(
-                        type: LineText.TYPE_BARCODE,
-                        content: voucher.voucherNumber,
-                        align: LineText.ALIGN_CENTER,
-                        linefeed: 1));*/
-
-                    list.add(LineText(linefeed: 1));
-                    list.add(LineText(linefeed: 1));
-
-                    //showCapturedWidget(context, capturedImage);
-                    await controller.bluetoothPrint.printLabel(config, list);
-                  }).catchError((onError) {
-                    print(onError);
-                  });
+                  if (reprint) {
+                    controller.reprintVoucher(voucher);
+                  } else {
+                    controller.printVoucher(voucher);
+                  }
                 },
                 child: Text(
-                  'Print',
+                  reprint ? 'Reprint' : "Print",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

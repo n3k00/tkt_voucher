@@ -6,6 +6,7 @@ import 'package:tkt_voucher/controller/receipts_controller.dart';
 import 'package:tkt_voucher/controller/settings_controller.dart';
 import 'package:tkt_voucher/controller/voucher_controller.dart';
 import 'package:tkt_voucher/page/connect_page.dart';
+import 'package:tkt_voucher/page/date_voucher_page.dart';
 import 'package:tkt_voucher/page/edit_cities_page.dart';
 import 'package:tkt_voucher/page/edit_heading_page.dart';
 import 'package:tkt_voucher/page/home_page.dart';
@@ -58,6 +59,10 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: "/settings/edit_cities",
           page: () => EditCitiesPage(),
+        ),
+        GetPage(
+          name: "/receipts/date",
+          page: () => DateVoucherPage(),
         ),
       ],
     );

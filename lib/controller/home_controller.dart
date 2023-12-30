@@ -7,7 +7,7 @@ import 'package:tkt_voucher/resource/dimens.dart';
 import 'package:tkt_voucher/resource/strings.dart';
 import 'package:intl/intl.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with WidgetsBindingObserver {
   BluetoothPrint bluetoothPrint = BluetoothPrint.instance;
   var isConnected = false.obs;
 
@@ -37,12 +37,21 @@ class HomeController extends GetxController {
     print('>>> HomeController init');
     super.onInit();
     getListData();
+    checkConnect();
   }
 
   @override
   void onReady() {
     print('>>> HomeController ready');
     super.onReady();
+    checkConnect();
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    print("<<< onCLose");
   }
 
   void getListData() {
@@ -71,7 +80,7 @@ class HomeController extends GetxController {
     phones = box.read("phones") ?? "";
   }
 
-  void prepareVoucher() {
+  void prepareVoucher() async {
     if (key.currentState!.validate() &&
         toTownSelected.value != fromTownSelected.value) {
       key.currentState!.save();
@@ -93,8 +102,12 @@ class HomeController extends GetxController {
         note: selectedNote.value,
         cashAdvance: cashAdvance.value,
       );
-      Get.toNamed("/home/voucher", arguments: [voucherVO, address, phones]);
-      // Add other values here
+      var result = await Get.toNamed("/home/voucher",
+          arguments: [voucherVO, address, phones, false]);
+      print("home $result");
+      if (result == "success") {
+        key.currentState?.reset();
+      }
     } else {
       Get.defaultDialog(
         title: "Warning",
@@ -124,5 +137,6 @@ class HomeController extends GetxController {
   void checkConnect() async {
     var check = await bluetoothPrint.isConnected;
     isConnected(check);
+    print(isConnected.value);
   }
 }

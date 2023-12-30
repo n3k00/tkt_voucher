@@ -74,11 +74,10 @@ class SettingsController extends GetxController {
   void addCity() {
     if (cityController!.text.isNotEmpty) {
       cityList.add(cityController!.text);
-      cityList.refresh();
+
       box.write("townList", cityList);
-      /*List<String> tempCityList = box.read<List<String>>("townList") ?? [];
-      print("temp $tempCityList");*/
       cityController!.text = "";
+      cityList.refresh();
       Get.back();
       Get.snackbar("Confirm", "Successful");
     } else {

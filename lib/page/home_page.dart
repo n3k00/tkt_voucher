@@ -4,9 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
-import 'package:tkt_voucher/page/voucher_page.dart';
 import 'package:tkt_voucher/resource/constant.dart';
 import 'package:tkt_voucher/resource/dimens.dart';
 import 'package:tkt_voucher/resource/strings.dart';
@@ -26,12 +24,14 @@ class HomePage extends GetView<HomeController> {
             onPressed: () {
               Get.toNamed("/home/connect");
             },
-            icon: controller.isConnected.value
-                ? Icon(
-                    Icons.bluetooth_connected_outlined,
-                    color: Colors.blue,
-                  )
-                : Icon(Icons.bluetooth),
+            icon: Obx(
+              () => Icon(
+                controller.isConnected.value
+                    ? Icons.bluetooth_connected_outlined
+                    : Icons.bluetooth,
+                color: controller.isConnected.value ? Colors.blue : null,
+              ),
+            ),
           ),
         ],
       ),
