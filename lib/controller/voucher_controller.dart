@@ -73,7 +73,7 @@ class VoucherController extends GetxController {
         'note': voucher.note,
         'cashAdvance': voucher.cashAdvance,
       });
-      if (result != -1) {
+      if (result != -1 && isConnected) {
         await bluetoothPrint.printLabel(config, list);
         Get.back(result: "success");
       } else {

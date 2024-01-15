@@ -9,28 +9,31 @@ class ItemDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width / 2.5,
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: TEXT_REGULAR_3X,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1)),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width / 2.5,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: TEXT_REGULAR_3X,
+              ),
             ),
           ),
-        ),
-        SizedBox(width: MARGIN_CARD_MEDIUM_2),
-        Expanded(
-          child: Text(
-            value,
-            style: TextStyle(
-              fontSize: TEXT_REGULAR_3X,
+          SizedBox(width: MARGIN_CARD_MEDIUM_2),
+          Expanded(
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: TEXT_REGULAR_3X,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

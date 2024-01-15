@@ -81,7 +81,12 @@ class HomePage extends GetView<HomeController> {
                                 )
                                 .toList(),
                             onChanged: (String? value) {
-                              controller.fromTownSelected.value = value!;
+                              if (controller.townList.contains(value)) {
+                                controller.fromTownSelected.value = value!;
+                              } else {
+                                // Handle the case where the value is not in townList
+                                // You can choose to set a default value or show an error message.
+                              }
                             },
                             buttonStyleData: DROP_DOWN_BUTTON_STYLE,
                           ),

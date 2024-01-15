@@ -2,7 +2,7 @@ import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tkt_voucher/controller/connect_controller.dart';
+import 'package:tkt_voucher/controller/home_controller.dart';
 
 class ConnectPage extends StatefulWidget {
   const ConnectPage({super.key});
@@ -16,7 +16,7 @@ class _ConnectPageState extends State<ConnectPage> {
   bool _connected = false;
   BluetoothDevice? _device;
   String tips = "no device connected";
-  final ConnectController connectController = Get.put(ConnectController());
+  HomeController controller = Get.put(HomeController());
 
   @override
   void initState() {
@@ -38,6 +38,7 @@ class _ConnectPageState extends State<ConnectPage> {
         case BluetoothPrint.CONNECTED:
           setState(() {
             _connected = true;
+            controller.isConnected.value = true;
             print("connect success");
             tips = 'connect success';
           });
@@ -45,6 +46,7 @@ class _ConnectPageState extends State<ConnectPage> {
         case BluetoothPrint.DISCONNECTED:
           setState(() {
             _connected = false;
+            controller.isConnected.value = false;
             print("disconnect success");
             tips = 'disconnect success';
           });

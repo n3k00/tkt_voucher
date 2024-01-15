@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
+import 'package:tkt_voucher/controller/login_controller.dart';
 import 'package:tkt_voucher/controller/receipts_controller.dart';
 import 'package:tkt_voucher/controller/settings_controller.dart';
-import 'package:tkt_voucher/controller/voucher_controller.dart';
 import 'package:tkt_voucher/page/connect_page.dart';
 import 'package:tkt_voucher/page/date_voucher_page.dart';
 import 'package:tkt_voucher/page/edit_cities_page.dart';
 import 'package:tkt_voucher/page/edit_heading_page.dart';
 import 'package:tkt_voucher/page/home_page.dart';
+import 'package:tkt_voucher/page/login_page.dart';
 import 'package:tkt_voucher/page/receipts_page.dart';
 import 'package:tkt_voucher/page/settings_page.dart';
 import 'package:tkt_voucher/page/voucher_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -29,6 +33,11 @@ class MyApp extends StatelessWidget {
       navigatorKey: Get.key,
       initialRoute: "/home",
       getPages: [
+        GetPage(
+          name: "/login",
+          page: () => LoginPage(),
+          binding: LoginBinding(),
+        ),
         GetPage(
           name: "/home",
           page: () => HomePage(),
@@ -87,5 +96,12 @@ class SettingsBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => SettingsController());
+  }
+}
+
+class LoginBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut(() => LoginController());
   }
 }

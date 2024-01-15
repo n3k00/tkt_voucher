@@ -82,7 +82,8 @@ class HomeController extends GetxController with WidgetsBindingObserver {
 
   void prepareVoucher() async {
     if (key.currentState!.validate() &&
-        toTownSelected.value != fromTownSelected.value) {
+        toTownSelected.value != fromTownSelected.value &&
+        isConnected.value) {
       key.currentState!.save();
       String voucherNumber = generateVoucherNumber();
       String dateAndTime = generateDateAndTime();

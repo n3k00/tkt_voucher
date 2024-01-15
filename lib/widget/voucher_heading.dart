@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tkt_voucher/resource/dimens.dart';
 
 class VoucherHeading extends StatelessWidget {
   final String address;
@@ -16,7 +17,7 @@ class VoucherHeading extends StatelessWidget {
             "သိင်္ခသူ ခရီးသည် ပို့ဆောင်ရေး",
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 30,
+              fontSize: TEXT_HEADING_X2,
               fontWeight: FontWeight.bold,
             ),
           ),

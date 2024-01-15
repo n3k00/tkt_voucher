@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "704553029696",
+    "project_id": "tktvoucher-37de3",
+    "storage_bucket": "tktvoucher-37de3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:704553029696:android:98c92031bdccf78cd4cfa5",
+        "android_client_info": {
+          "package_name": "com.tktcar.voucher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR2Vhk6W2HOYjVsIyr9tEEgVHv62eF3Ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

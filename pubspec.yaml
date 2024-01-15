@@ -47,6 +47,10 @@ dependencies:
   barcode_widget: ^2.0.4
   sqflite: ^2.3.0
   path: ^1.8.3
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.14.0
+  firebase_dart: ^1.0.9
 
 
 dev_dependencies:
