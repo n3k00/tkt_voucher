@@ -16,3 +16,6 @@ const TEXT_REGULAR_3X = 20.0;
 const TEXT_HEADING_X1 = 24.0;
 const TEXT_HEADING_X2 = 28.0;
 const TEXT_BIG = 32.0;
+
+/// Application Specification
+const LOGO_WIDTH = 200.0;

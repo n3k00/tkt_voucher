@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
@@ -13,6 +14,8 @@ class VoucherController extends GetxController {
   BluetoothPrint bluetoothPrint = BluetoothPrint.instance;
   ScreenshotController screenshotController = ScreenshotController();
   var isConnected = false;
+  CollectionReference vouchers =
+      FirebaseFirestore.instance.collection('vouchers');
 
   @override
   Future<void> onInit() async {
@@ -57,6 +60,28 @@ class VoucherController extends GetxController {
                         linefeed: 1));*/
 
       //showCapturedWidget(context, capturedImage);
+      /// insert data in firestore
+      vouchers
+          .add({
+            'voucherNumber': voucher.voucherNumber,
+            'dateAndTime': voucher.dateAndTime,
+            'carNumber': voucher.carNumber,
+            'fromTown': voucher.fromTown,
+            'toTown': voucher.toTown,
+            'sender': voucher.sender,
+            'senderPhone': voucher.senderPhone,
+            'receiver': voucher.receiver,
+            'receiverPhone': voucher.receiverPhone,
+            'type': voucher.type,
+            'numberOfParcel': voucher.numberOfParcel,
+            'charges': voucher.charges,
+            'note': voucher.note,
+            'cashAdvance': voucher.cashAdvance,
+          })
+          .then((value) => print("Voucher Added"))
+          .catchError((error) => print("Failed to add Voucher: $error"));
+
+      /// inset data in database
       var result = await DatabaseHelper().insertVoucher({
         'voucherNumber': voucher.voucherNumber,
         'dateAndTime': voucher.dateAndTime,

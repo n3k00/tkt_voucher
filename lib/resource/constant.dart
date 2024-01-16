@@ -14,6 +14,14 @@ var INPUT_TEXT_FIELD_STYLE = InputDecoration(
     borderRadius: BorderRadius.circular(MARGIN_MEDIUM),
     borderSide: BorderSide(color: Colors.black, width: 2),
   ),
+  errorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(MARGIN_MEDIUM),
+    borderSide: BorderSide(color: Colors.red, width: 2),
+  ),
+  focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.circular(MARGIN_MEDIUM),
+    borderSide: BorderSide(color: Colors.red, width: 2),
+  ),
 );
 
 var DROP_DOWN_BUTTON_STYLE = ButtonStyleData(

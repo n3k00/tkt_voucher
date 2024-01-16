@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TKT Voucher',
       navigatorKey: Get.key,
-      initialRoute: "/home",
+      initialRoute:
+          FirebaseAuth.instance.currentUser != null ? "/home" : "/login",
       getPages: [
         GetPage(
           name: "/login",
