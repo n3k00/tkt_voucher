@@ -47,11 +47,35 @@ class HomeController extends GetxController with WidgetsBindingObserver {
     checkConnect();
   }
 
+  Future<bool> showExitConfirmationDialog() async {
+    return await Get.dialog<bool>(
+          AlertDialog(
+            title: Text('Exit Confirmation'),
+            content: Text('Are you sure you want to exit the app?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.back(result: false); // Return false when "No" is pressed
+                },
+                child: Text('No'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Get.back(result: true); // Return true when "Yes" is pressed
+                },
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   void onClose() {
     // TODO: implement onClose
+    print("<<<<<<<<<<<<<<<<<<<< onCLose");
     super.onClose();
-    print("<<< onCLose");
   }
 
   void getListData() {

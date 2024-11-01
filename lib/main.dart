@@ -32,8 +32,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'TKT Voucher',
       navigatorKey: Get.key,
-      initialRoute:
-          FirebaseAuth.instance.currentUser != null ? "/home" : "/login",
+      /*initialRoute:
+          FirebaseAuth.instance.currentUser != null ? "/home" : "/login",*/
+      initialRoute: "/home",
       getPages: [
         GetPage(
           name: "/login",
@@ -86,6 +87,7 @@ class HomeBinding extends Bindings {
     Get.put(HomeController(), permanent: true);
   }
 }
+//
 
 class ReceiptsBinding extends Bindings {
   @override

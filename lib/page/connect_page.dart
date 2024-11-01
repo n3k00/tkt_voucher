@@ -2,6 +2,7 @@ import 'package:bluetooth_print/bluetooth_print.dart';
 import 'package:bluetooth_print/bluetooth_print_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:tkt_voucher/controller/home_controller.dart';
 
 class ConnectPage extends StatefulWidget {
@@ -138,7 +139,9 @@ class _ConnectPageState extends State<ConnectPage> {
                                     setState(() {
                                       tips = 'connecting...';
                                     });
+                                    await bluetoothPrint.disconnect();
                                     await bluetoothPrint.connect(_device!);
+                                    print(_device?.toJson());
                                   } else {
                                     setState(() {
                                       tips = 'please select device';
@@ -159,6 +162,19 @@ class _ConnectPageState extends State<ConnectPage> {
                                 }
                               : null,
                           child: Text('disconnect'),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        OutlinedButton(
+                          onPressed: () async {
+                            setState(() {
+                              tips = 'Destroying...';
+                            });
+                            await bluetoothPrint.destroy();
+                          },
+                          child: Text('Destroy'),
                         ),
                       ],
                     ),

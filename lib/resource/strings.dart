@@ -52,3 +52,4 @@ const WARNING_TEXT_FOR_SETTING_PAGE = "အချက်အလက်ကို ပ�
 const ADDRESS_STRING =
     "41 ဂိတ်၊ နှစ်ထပ်တိုက်တန်းရှေ့၊ ရပ်ကွက်(၄)၊ လားရှိုးမြို့";
 const PHONES_STRING = "09429363127, 09250787547, 09666628053";
+const EXTI_TITLE = "ထွက်မှာသေခြာပြီလား။";

@@ -19,3 +19,4 @@ const TEXT_BIG = 32.0;
 
 /// Application Specification
 const LOGO_WIDTH = 200.0;
+const EXIT_DIALOG_HEIGHT = 100.0;

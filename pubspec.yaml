@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   get: ^4.6.6
   bluetooth_print: ^4.3.0
-  screenshot: ^2.1.0
+  screenshot: ^3.0.0
   sks_ticket_view: ^1.0.0
   dotted_line: ^3.2.2
   font_awesome_flutter: ^10.6.0
